@@ -1,0 +1,8 @@
+[Unit]
+Description=Xinit
+
+[Service]
+ExecStart=/usr/bin/xinit -- :0 vt7
+
+[Install]
+WantedBy=wm.target
