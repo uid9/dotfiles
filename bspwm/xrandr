@@ -1,0 +1,29 @@
+#!/bin/sh
+
+exec >/run/user/1000/xrandr.log 2>&1
+
+export DISPLAY=:0
+
+HDMI2_status=$(</sys/class/drm/card0-HDMI-A-2/status)
+eDP1_enabled=$(</sys/class/drm/card0-eDP-1/enabled)
+
+case "$1" in
+    dual)
+        if [[ "$HDMI2_status" == "connected" ]]; then
+            if [[ "$eDP1_enabled" == "disabled" ]]; then
+                /usr/bin/xrandr --output eDP1 --primary --auto --output HDMI2 --right-of eDP1 --auto
+            else
+                /usr/bin/xrandr --output HDMI2 --primary --auto --output eDP1 --off
+            fi
+        fi
+    ;;
+    *)
+        if [[ "$HDMI2_status" == "connected" ]]; then
+            /usr/bin/xrandr --output HDMI2 --primary --auto --output eDP1 --off
+        else
+            /usr/bin/xrandr --output eDP1 --primary --auto --output HDMI2 --off
+        fi
+    ;;
+esac
+
+$HOME/.config/bspwm/bspwmrc
