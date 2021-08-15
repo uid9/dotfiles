@@ -2,7 +2,9 @@
 Description=Xinit
 
 [Service]
+ExecStartPre=/usr/bin/su -c '/usr/bin/chmod 660 /dev/tty7'
 ExecStart=/usr/bin/xinit -- :0 vt7
+Restart=on-success
 
 [Install]
-WantedBy=wm.target
+WantedBy=default.target

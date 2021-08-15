@@ -1,0 +1,11 @@
+[Unit]
+Description=SSH agent
+
+[Service]
+Environment=SSH_AUTH_SOCK=%t/ssh-agent
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+ExecStartPost=/usr/bin/sleep 1
+ExecStartPost=/usr/bin/ssh-add %h/.ssh/id_rsa
+
+[Install]
+WantedBy=default.target

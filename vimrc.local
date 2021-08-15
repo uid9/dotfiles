@@ -2,17 +2,14 @@ set showcmd
 set ignorecase
 set smartcase
 set incsearch
-set mouse-=a
 set hlsearch
-syntax enable
-set bg=dark
-let g:solarized_termtrans=1
-let g:solarized_contrast='high'
-colorscheme solarized
-set number
+set mouse-=a
 set tabstop=4
 set expandtab
 set shiftwidth=4
+set number
+set splitbelow
+set splitright
 
 nmap <C-r> :call ToggleRnu()<cr>
 function ToggleRnu()
@@ -25,3 +22,11 @@ function ToggleRnu()
         set nu
     endif
 endfunc
+
+syntax enable
+set background=dark
+set t_Co=16
+colorscheme slate
+
+hi Comment  ctermfg=7 cterm=italic
+hi LineNr   ctermfg=7 ctermbg=8

@@ -1,1 +1,2 @@
-wm.target
+[Unit]
+Description=Default Target
